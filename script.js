@@ -16,6 +16,8 @@ function checkLogin(intent) {
 			// gjør skjermen mørk og vis login/registreringsskjerm
 			grayOut(true);
 			$('regbox').innerHTML = mini.ajax.gets('regbox.php?intent='+intent)+'<a id="exit" href="javascript:hide()">Lukk vinduet (esc)</a>';
+			$('register').innerHTML += '<input name="js_enabled" type="hidden" value="1">';
+			$('login').innerHTML += '<input name="js_enabled" type="hidden" value="1">';
 			Recaptcha.create("6LfVfb4SAAAAAPFjUH67cZpQrul1Wj_gnDXJdZ2O", "recaptcha", {theme: "white", tabindex: 2, callback: Recaptcha.focus_response_field});
 			$('regbox').style.display = 'block'; // vis boksen
 		}

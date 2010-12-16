@@ -11,17 +11,11 @@
 					<input type="hidden" name="recaptcha_response_field" value="manual_challenge">
 				</noscript>
 			</div>
-			<noscript>
-				<input name="js_disabled" type="hidden" value="1">
-			</noscript>
 			<input type="submit" value="Registrer deg" />
 		</form>
 		<form id="login" action="login.php<?php echo '?intent='.$_GET['intent']; ?>" onsubmit="return checkLogStatus(this, '<?php echo '?intent='.$_GET['intent']; ?>')" method="post">
 			<h4>...eller logg inn</h4>
 			<label for="username">Brukernavn </label><input id="username" class="textbox" type="text" name="username" maxlength="32" tabindex="3" />
 			<label for="password">Passord </label><input id="password" class="textbox" type="password" name="password" maxlength="32" tabindex="4" />
-			<noscript>
-				<input name="js_disabled" type="hidden" value="1">
-			</noscript>
 			<input type="submit" value="Logg inn" tabindex="5" />
 		</form>

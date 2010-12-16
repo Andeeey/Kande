@@ -2,12 +2,12 @@
 	require_once './db.php';
 	require_once 'recaptchalib.php';
 	
-	// js_disabled/browser_check blir satt til 1 dersom javascript er skrudd av, fra skjult inputfelt
+	// js_enabled/browser_check blir satt til 1 dersom javascript er skrudd av, fra skjult inputfelt
 	$browser_check = 0;
-	if(isset($_POST['js_disabled']))
-		$browser_check = $_POST['js_disabled'];
+	if(isset($_POST['js_enabled']))
+		$browser_check = $_POST['js_enabled'];
 	
-	if ($browser_check == 1) {
+	if ($browser_check == 0) {
 		include './header.php';	
 		echo '<section id="error">';
 	}
@@ -19,7 +19,7 @@
 									$_POST["recaptcha_response_field"]);
 
 	if (!$resp->is_valid) {
-		if ($browser_check == 1)
+		if ($browser_check == 0)
 			echo 'CAPTCHAen ble ikke besvart riktig.<br/>';
 		else
 			echo "$('message').innerHTML = 'CAPTCHAen ble ikke besvart riktig. Prøv igjen.'; $('message').style.color = '#d50'"; // evalueres av ajax-funksjonen når den returneres
@@ -27,7 +27,7 @@
 		if (isset($_POST['newusername']) && !empty($_POST['newusername']))
 			$name = $_POST['newusername'];
 		else {
-			if ($browser_check == 1)
+			if ($browser_check == 0)
 				echo 'Du må fylle inn brukernavn.<br/>';
 			else
 				echo "$('message').innerHTML = 'Du må fylle inn brukernavn.'; $('message').style.color = '#d50'";
@@ -36,7 +36,7 @@
 		if (isset($_POST['newpassword']) && !empty($_POST['newpassword']))
 			$pass = $_POST['newpassword'];
 		else {
-			if ($browser_check == 1)
+			if ($browser_check == 0)
 				echo 'Du må fylle inn passord.<br/>';
 			else
 				echo "$('message').innerHTML = 'Du må fylle inn passord.'; $('message').style.color = '#d50'";
@@ -54,12 +54,12 @@
 					$_SESSION['key'] = $response['sessionKey'];
 					// hvis brukeren ville gå til redigeringsskjerm, redirect dit, ellers tilbake til samme skjerm
 					if ($_GET['intent'] == 'edit.php') {
-						if ($browser_check == 1)
+						if ($browser_check == 0)
 							header('Location:edit.php');
 						else
 							echo "window.location = 'edit.php'";
 					} else {
-						if ($browser_check == 1)
+						if ($browser_check == 0)
 							header('Location:'.$_SERVER['HTTP_REFERER']);
 						else
 							echo "window.location = '".$_SERVER['HTTP_REFERER']."'";
@@ -71,7 +71,7 @@
 	if (!isset($name) || !isset($pass) || !$resp->is_valid)
 		echo 'Gå tilbake og prøv igjen.';
 	
-	if ($browser_check == 1) {
+	if ($browser_check == 0) {
 		echo '</section>';
 		include './footer.php';	
 	}
