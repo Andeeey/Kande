@@ -148,7 +148,7 @@ function getResourcesByUID($uid, $startFrom, $count, $sortBy, $ascending, $tags)
 		$resArray = array();
 		
 		while($resData = mysql_fetch_row($result))
-			array_push($resArray, ResourceClass($resData[0], $resData[1], $resData[2], $resData[6], dcSemicolonStringToArray($resData[7]), $resData[5], $resData[4], $resData[3], dcSemicolonStringToArray($resData[8])));
+			array_push($resArray, new ResourceClass($resData[0], $resData[1], $resData[2], $resData[6], dcSemicolonStringToArray($resData[7]), $resData[5], $resData[4], $resData[3], dcSemicolonStringToArray($resData[8])));
 		
 		$result = $resArray;
 	}
@@ -517,7 +517,7 @@ function dcCheckAndBuildDB()
 	$result = mysql_query($sql) && $result;
 	
 	$sql = "CREATE TABLE `".DB_NAME."`.`users` (
-		`uid` VARCHAR( 32 ) COLLATE Latin1_General_CS_AS NOT NULL,
+		`uid` VARCHAR( 32 ) COLLATE Latin1_General_CS NOT NULL,
 		`auth` TINYINT UNSIGNED NOT NULL ,
 		`passhash` CHAR( 32 ) NOT NULL ,
 		`salt` CHAR( 16 ) NOT NULL ,

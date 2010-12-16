@@ -28,7 +28,16 @@
 							$commentList .= ' (<a href="edit.php?cid='.urlencode($com['cid']).'">rediger</a> | <a href="delete.php?cid='.urlencode($com['cid']).'">slett</a>)';
 						$commentList .= '</p></div><div class="commentcontent">'.$r->textReplace($com['comment']).'</div></div>';
 					}
-					echo '<h3 class="commentheader">'.countCommentsByUID($_GET['uid']).' kommentarer av '.$_GET['uid'].'</h3>';
+					
+					// Tilordne flertallsending i "kommentar(er)" når det er relevant:
+					$commentCount = countCommentsByUID($_GET['uid']);
+					
+					$commentTextEnding = "";
+					
+					if($commentCount != 1)
+						$commentTextEnding = "er";
+					
+					echo '<div class="commentheader"><h3>'.$commentCount.' kommentar'.$commentTextEnding.' av '.$_GET['uid'].'</h3></div>';
 					echo $commentList;
 					echo '</div><hr/>';
 				}

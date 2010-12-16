@@ -126,7 +126,6 @@ a.skiplink:focus, a.skiplink:active { /* synlig ved tastenavigasjon */
 }
 
 nav {
-	float: left;
 	line-height: 2em;
 	margin: 0.5em 0;
 	width: 100%;
@@ -257,7 +256,6 @@ iframe {
 .resource {
 	margin: 0.5em 0;
 	background: #fff;
-	float: left;
 	width: 100%;
 	border: 1px solid #ccc;
 }
@@ -386,7 +384,6 @@ aside {
 }
 
 .user {
-	float: left;
 	padding: 0.5em 0 0.5em;
 }
 
