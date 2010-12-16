@@ -38,10 +38,9 @@
 				else				
 					echo "$('message').innerHTML = 'Feil ved pålogging. Har du fylt ut riktig?'; $('message').style.color = '#d50'"; 
 			} else {
-				session_id($response['sessionKey']);
 				session_start();
-				$_SESSION['name'] = $name;
-				$_SESSION['pass'] = $pass;
+				session_regenerate_id();
+				$_SESSION['key'] = $response['sessionKey'];
 				// hvis brukeren ville gå til redigeringsskjerm, redirect dit, ellers tilbake
 				if ($_GET['intent'] == 'edit.php') {
 					if ($browser_check == 1)

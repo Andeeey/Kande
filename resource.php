@@ -156,7 +156,7 @@ class ResourceClass {
 		include_once './db.php';
 		session_start();
 		if (connectToDB()) {
-			$s = verifyUser($_SESSION['name'], $_SESSION['pass'], false);
+			$s = verifySessionKey($_SESSION['key']);
 			if (($s['user'] == $this->owner) || ($s['auth'] == 3))
 				echo ' (<a href="edit.php?id='.$this->id.'">rediger</a> | <a href="delete.php?id='.$this->id.'">slett</a>)';
 			/*

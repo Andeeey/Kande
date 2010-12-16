@@ -49,10 +49,9 @@
 					echo "$('message').innerHTML = 'Feil ved registrering av bruker. Kanskje du vil prøve igjen?'; $('message').style.color = '#d50'";
 				else {
 					$response = verifyUser($name, $pass, false);
-					session_id($response['sessionKey']);
 					session_start();
-					$_SESSION['name'] = $name;
-					$_SESSION['pass'] = $pass;
+					session_regenerate_id();
+					$_SESSION['key'] = $response['sessionKey'];
 					// hvis brukeren ville gå til redigeringsskjerm, redirect dit, ellers tilbake til samme skjerm
 					if ($_GET['intent'] == 'edit.php') {
 						if ($browser_check == 1)

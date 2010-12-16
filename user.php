@@ -23,7 +23,7 @@
 					$commentList = '';
 					foreach ($comments as $com) {
 						$commentList .= '<div class="comment"><div class="commentdata"><p><a href="user.php?uid='.urlencode($com['uid']).'">'.$com['uid'].'</a> for '.$r->time_since($com['timecreated']).' siden:';
-						$s = verifyUser($_SESSION['name'], $_SESSION['pass'], false);
+						$s = verifySessionKey($_SESSION['key']);
 						if (($s['user'] == $com['uid']) || ($s['auth'] == 3))
 							$commentList .= ' (<a href="edit.php?cid='.urlencode($com['cid']).'">rediger</a> | <a href="delete.php?cid='.urlencode($com['cid']).'">slett</a>)';
 						$commentList .= '</p></div><div class="commentcontent">'.$r->textReplace($com['comment']).'</div></div>';

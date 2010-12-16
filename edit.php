@@ -11,7 +11,7 @@
 			
 			session_start();
 			if (connectToDB()) {
-				$s = verifyUser($_SESSION['name'], $_SESSION['pass'], false);
+				$s = verifySessionKey($_SESSION['key']);
 				// hvis vi har getdata med direkte identifikasjon av ressurs, skal denne redigeres
 				if (isset($_GET['id']) && !empty($_GET['id'])) {
 					$res = getResourceByID($_GET['id']);

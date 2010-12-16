@@ -24,7 +24,7 @@
 
 		if (connectToDB()) {
 			//sjekk først at bruker er innlogget
-			if (!verifyUser($_SESSION['name'], $_SESSION['pass'], false)) {
+			if (!verifySessionKey($_SESSION['key'])) {
 				header('Location:.');
 				die;				
 			} else {
@@ -38,7 +38,7 @@
 					modifyResourceByID($id, $res);
 				} else {
 					// opprett objekt				
-					$res = new ResourceClass(0, $_POST['name'], $_POST['url'], $_POST['desc'], $tags, 0, 0, $_SESSION['name']);	
+					$res = new ResourceClass(0, $_POST['name'], $_POST['url'], $_POST['desc'], $tags, 0, 0, substr($_SESSION['key'], 32));	
 					// skriv ressurs til database, få id i retur
 					$id = addResource($res);
 					// stem opp for ressurseier selv

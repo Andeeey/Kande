@@ -23,7 +23,7 @@
 					foreach ($comments as $com) {
 						$commentList .= '<div class="comment"><div class="commentdata"><p><a href="user.php?uid='.urlencode($com['uid']).'">'.$com['uid'].'</a> for '.$res->time_since($com['timecreated']).' siden:';
 						session_start();
-						$s = verifyUser($_SESSION['name'], $_SESSION['pass'], false);
+						$s = verifySessionKey($_SESSION['key']);
 						if (($s['user'] == $com['uid']) || ($s['auth'] == 3))
 							$commentList .= ' (<a href="item.php?id='.$res->id.'&cid='.$com['cid'].'">rediger</a> | <a href="delete.php?cid='.$com['cid'].'">slett</a>)';
 						$commentList .= '</p></div><div class="commentcontent">'.$res->textReplace($com['comment']).'</div></div><hr/>';
@@ -32,8 +32,8 @@
 					// hent kommentartekst hvis vi har bedt om redigering
 					$edit = '';
 					$add = '';
-					if (isset($_GET['cid']) && !empty($_GET['cid']) && !empty($_SESSION['name']) && !empty($_SESSION['pass'])) {
-						$s = verifyUser($_SESSION['name'], $_SESSION['pass'], false);
+					if (isset($_GET['cid']) && !empty($_GET['cid']) && !empty($_SESSION['key'])) {
+						$s = verifySessionKey($_SESSION['key']);
 						$c = getCommentByCID($_GET['cid']);
 						if (($_SESSION['name'] == $c['uid']) || ($s['auth'] == 3)) {
 							$edit = $c['comment'];
