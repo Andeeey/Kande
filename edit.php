@@ -22,9 +22,9 @@
 						die;
 					}
 				}
-				// hvis bruker ikke er innlogget, send til starside og terminer
+				// hvis bruker ikke er innlogget, send til login
 				if (!$s) {
-					header('Location:.');
+					header('Location:basiclogin.php?intent=edit.php');
 					die;
 				}
 			}	
@@ -45,7 +45,10 @@
 				<textarea name="desc" id="desc" rows="20" onkeyup="searchForTags(this.value, taglist)"><?php if (isset($res->description)) echo $res->description; ?></textarea>	
 				
 				<h4>Tags</h4>
-				<span id="tagspan">Skriv tags separert av komma, eller legg til fra lista under. Vi gjør vårt beste med å hjelpe deg å velge.</span><br/>
+				<span id="tagspan">
+				<script>document.write('Skriv tags separert av komma, eller legg til fra lista under. Vi gjør vårt beste med å hjelpe deg å velge.');</script>
+				<noscript>Skriv tags separert av komma, og velg gjerne fra lista under dersom disse passer.</noscript>
+				</span><br/>
 				<input class="textbox" type="text" id="tags" name="tags" value="<?php if (isset($res->tags)) echo implode(', ',$res->tags); ?>" onkeyup="replaceDuplicateTags(taglist)" maxlength="256" /><br/>
 				<?php
 					if (connectToDB()) {

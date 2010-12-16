@@ -61,6 +61,9 @@
 			include './livesearch.php';
 		?>
 		</div>
+		<script>
+			AJAXify();
+		</script>
 	</section>
 	<aside>
 		<div id="contribute" title="...eller still et spørsmål!"><script>document.write('<a href="javascript:checkLogin(\'edit.php\')">Legg til en ressurs</a>');</script><noscript><a href="edit.php">Legg til en ressurs</a></noscript></div>

@@ -84,8 +84,7 @@ class ResourceClass {
 		$str = preg_replace('#\[([^\]]+)\|' . $rg_link_http . '\]#U', '<a href="xx$2" class="url">$1</a>', $str); // lenke med lenketekst
 		$str = preg_replace('#' . $rg_link_http . '#i', '<a href="$0" class="url">xx$1</a>', $str); // ren url
 		$str = preg_replace('#xxttp#', 'http', $str); // bare fordi
-		$str = preg_replace("/¤¤(.+)¤¤/Ums", '<iframe class="youtube-player" type="text/html" width="640" height="385" src="http://www.youtube.com/embed/$1" frameborder="0">
-</iframe>', $str); // sett tilbake youtube-innhold
+		$str = preg_replace("/¤¤(.+)¤¤/Ums", '<iframe class="youtube-player" type="text/html" width="640" height="385" src="http://www.youtube.com/embed/$1" frameborder="0"></iframe>', $str); // sett tilbake youtube-innhold
 		$str = str_replace("<p><iframe", "<iframe", $str); // fjern p fra iframe
 		$str = str_replace("/iframe></p>", "/iframe>", $str);
 		return $str;
@@ -101,7 +100,6 @@ class ResourceClass {
 		$taglinks = '';
 		foreach ($this->tags as $n => $tag) {
 			$taglinks = $taglinks.'<a class="tag" href="index.php?tags[]='.urlencode($tag).'" onclick="search(searchDefault(), \'&amp;tags[]='.urlencode($tag).'\')">'.str_replace(' ','&nbsp;',$tag).'</a>';
-			//$taglinks = $taglinks.'<a class="tag" href="javascript:search(searchDefault(), \'&amp;tags[]='.urlencode($tag).'\')">'.$tag.'</a>';
 			if ($n < count($this->tags)-1)
 				$taglinks = $taglinks.' ';
 		}
@@ -116,7 +114,7 @@ class ResourceClass {
 
 		echo '<div class="resource">'
 		.'<div class="vote">'
-		.'<a href="javascript:upBoat(\'upvote.php?id='.$this->id.'\')"><img alt="Stem opp" title="Stem opp" src="upvote.gif" style="height: 16px" /></a>' // <noscript><a href="upvote.php?id='.$this->id.'"><img alt="Stem opp" title="Stem opp" src="upvote.gif" style="height: 16px" /></a></noscript>
+		.'<a class="upvote" href="upvote.php?id='.$this->id.'"><img alt="Stem opp" title="Stem opp" src="upvote.gif" style="height: 16px" /></a>'
 		.' <span class="score" id="scoreID'.$this->id.'">'.$this->score.'</span>'
 		.' poeng, '
 		.' <span class="userdate">skrevet av <a href="user.php?uid='.urlencode($this->owner).'">'.$this->owner.'</a> for '.$this->time_since($this->date).' siden</span>';
@@ -142,14 +140,13 @@ class ResourceClass {
 		$taglinks = '';
 		foreach ($this->tags as $n => $tag) {
 			$taglinks = $taglinks.'<a class="tag" href="index.php?tags[]='.urlencode($tag).'">'.str_replace(' ','&nbsp;',$tag).'</a>';
-			//$taglinks = $taglinks.'<a class="tag" href="javascript:search(searchDefault(), \'&amp;tags[]='.urlencode($tag).'\')">'.$tag.'</a>';
 			if ($n < count($this->tags)-1)
 				$taglinks = $taglinks.' ';
 		}
 		
 		echo '<div class="resource">'
 		.'<div class="vote">'
-		.'<a href="javascript:upBoat(\'upvote.php?id='.$this->id.'\')"><img alt="Stem opp" title="Stem opp" src="upvote.gif" style="height: 16px" /></a>' // <noscript><a href="upvote.php?id='.$this->id.'"><img alt="Stem opp" title="Stem opp" src="upvote.gif" style="height: 16px" /></a></noscript>
+		.'<a class="upvote" href="upvote.php?id='.$this->id.'"><img alt="Stem opp" title="Stem opp" src="upvote.gif" style="height: 16px" /></a>'
 		.' <span class="score" id="scoreID'.$this->id.'">'.$this->score.'</span>'
 		.' poeng, '
 		.' <span class="userdate">skrevet av <a href="user.php?uid='.urlencode($this->owner).'">'.$this->owner.'</a> for '.$this->time_since($this->date).' siden</span>';

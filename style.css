@@ -390,3 +390,7 @@ aside {
 .highlight {
 	background-color: #f6ccda;
 }
+
+#jsform {
+	display: none;
+}
