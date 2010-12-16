@@ -93,7 +93,7 @@ class ResourceClass {
 	
 	function highlightWords($string, $words) {
 		foreach ($words as $word)
-			$string = str_ireplace($word, '<span class="highlight">'.$word.'</span>', $string);
+			$string = preg_replace("/($word)/i", '<span class="highlight">$1</span>', $string);
 		return $string;
 	}
 	
