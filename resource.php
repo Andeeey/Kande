@@ -156,11 +156,11 @@ class ResourceClass {
 			$s = verifySessionKey($_SESSION['key']);
 			if (($s['user'] == $this->owner) || ($s['auth'] == 3))
 				echo ' (<a href="edit.php?id='.$this->id.'">rediger</a> | <a href="delete.php?id='.$this->id.'">slett</a>)';
-			/*
+			
 			if ($s)
 				echo ' (<a href="report.php?id='.$this->id.'">rapporter</a>)';
-			*/
 		}
+		
 		echo '</div>'	//vote
 		.'<div class="data">'
 		.'<h3><a href="'.$this->url.'">'.$this->name.'</a></h3>'
